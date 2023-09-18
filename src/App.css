@@ -1,0 +1,14 @@
+.message {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.message.user {
+  background-color: #e6e6e6;
+}
+
+.message.assistant {
+  background-color: #4CAF50;
+  color: white;
+}
