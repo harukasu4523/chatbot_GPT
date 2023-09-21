@@ -13,7 +13,7 @@ function safeParse(assistantReply){
                 "anger": 0,
                 "sad": 0
             },
-            "message": "Sorry, there was an error processing the response."
+            "message": "すまないもう一度言ってくれないか。"
             };
         return defaultValue;
     }
@@ -27,14 +27,16 @@ function App() {
         e.preventDefault();
 
         const newConversations = [...conversations, { role: 'user', content: userInput }];
-
+        const combinedContent = newConversations.slice(-10).map(convo => `${convo.role === "user" ? "User" : "Assistant" }: ${convo.content}`).join(" ");
+       
+        console.log(combinedContent);
         try {
             const response = await axios.post('https://api.openai.com/v1/chat/completions', {
                 model: "gpt-3.5-turbo",
                 messages: [
                   {"role": "system", "content": gptConfig
                 },
-                  {"role": "user", "content":userInput}
+                  {"role": "user", "content":combinedContent}
                 ],
             }, {
               headers: {
